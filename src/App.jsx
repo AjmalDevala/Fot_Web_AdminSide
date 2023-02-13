@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ColorModeContext, useMode } from "../src/theme/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import React from "react";
+import React,{useState} from "react";
 import ErrorPage from "./error/ErrorPage";
 import Dashboard from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
@@ -12,12 +12,13 @@ import ScoutTablePage from "./pages/ScoutTablePage";
 
 function App() {
   const [theme, colorMode] = useMode();
-
+ const [login,setlogin]=useState(false);
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
+        {/* { login ? */}
           <div className="app">
             <Sidebar />
             <main className="content">
@@ -34,7 +35,15 @@ function App() {
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </main>
-          </div>
+            </div>
+          {/* </div>
+          : 
+             <Routes>
+
+             <Route path="/login" element={<LoginPage />} />
+
+             <Route path="*" element={<ErrorPage />} />
+           </Routes>} */}
         </BrowserRouter>
       </ThemeProvider>
     </ColorModeContext.Provider>
