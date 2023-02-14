@@ -18,7 +18,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-        {/* { login ? */}
+        { login ?
           <div className="app">
             <Sidebar />
             <main className="content">
@@ -31,19 +31,19 @@ function App() {
                 <Route path="/playersTable" element={<PlayersTable />} />
                 <Route path="/scoutTable" element={<ScoutTablePage />} />
 
-                {/* erro Page */}
+                erro Page
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </main>
-            </div>
-          {/* </div>
-          : 
+            </div>:
+            // </div>: 
              <Routes>
 
              <Route path="/login" element={<LoginPage />} />
 
              <Route path="*" element={<ErrorPage />} />
-           </Routes>} */}
+           </Routes>}
+           
         </BrowserRouter>
       </ThemeProvider>
     </ColorModeContext.Provider>

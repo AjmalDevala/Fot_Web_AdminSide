@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import axios from "axios";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginValidation } from "../../helpers/validation";
 function Login() {
   
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
@@ -26,7 +26,7 @@ function Login() {
         
       let { token } = res.data;
         localStorage.setItem('token', token);
-        // dispatch(authenticate());
+        dispatch(authenticate());
         navigate('/')
       }).catch((error)=>{
         console.log(error)
