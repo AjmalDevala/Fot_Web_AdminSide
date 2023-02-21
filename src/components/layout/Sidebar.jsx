@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { tokens } from "../../theme/theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -32,6 +32,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+  const logout =()=>{Navigate('/')};
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -123,14 +124,14 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
               <Item
-                title="Manage Scout"
+                title="Manage Scouts"
                 to="/scoutTable"
                 icon={<HomeWorkOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
             <Item
-              title="Manage Player"
+              title="Manage Players"
               to="/playersTable"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
@@ -143,13 +144,17 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             /> */}
-            <Item
+            <div>
+
+            <button
               title="logout"
-              to="/login"
-              icon={<ApartmentOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+              onClick={()=>{
+                localStorage.clear()
+                window.location.reload()
+                Navigate('/')
+              }}
+              ><ApartmentOutlinedIcon />Logout</button>
+              </div>
             {/* <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -199,4 +204,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebar

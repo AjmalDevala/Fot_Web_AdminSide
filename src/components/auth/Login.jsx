@@ -21,13 +21,13 @@ function Login() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-    console.log("happy ending");
       await axios.post('http://localhost:7007/api/admin/adminLogin',{values}).then((res)=>{
         
       let { token } = res.data;
-        localStorage.setItem('token', token);
+      localStorage.setItem('token', token);
+       window.location.reload();
         dispatch(authenticate());
-        navigate('/')
+        navigate('/home')
       }).catch((error)=>{
         console.log(error)
         toast.error(error.response.data.error)
@@ -36,7 +36,7 @@ function Login() {
  
   return (
     <div className="h-screen bg-[url('/src/assets/images/playerlogin.jpg')] ">
-      <Toaster position="top-center"></Toaster>
+      <Toaster position="top-center" reverseOrder={false}></Toaster>
       <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg">
           <h1 class="text-center text-2xl font-bold text-white sm:text-3xl">

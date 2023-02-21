@@ -1,6 +1,20 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Dashboard() {
+  const [users, setAllUsers] = useState("");
+  const [scouts, setAllScouts] = useState("");
+  const [players, setAllPlayers] = useState("");
+  useEffect(() => {
+    axios.get("http://localhost:7007/api/admin/dashbord").then((response) => {
+      console.log(response.data);
+      setAllUsers(response.data.allUser);
+      setAllScouts(response.data.allScout);
+      setAllPlayers(response.data.allplayer);
+    });
+  }, []);
+
+
   return (
     <main class="">
       <div class="grid mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-green-400">
@@ -37,8 +51,8 @@ function Dashboard() {
                     </div>
                     <div class="ml-2 w-full flex-1">
                       <div>
-                        <div class="mt-3 text-3xl font-bold leading-8">
-                          40
+                        <div class="mt-3 text-3xl text-black font-bold leading-8">
+                          {users}
                         </div>
 
                         <div class="mt-1 text-base text-gray-600">
@@ -74,8 +88,8 @@ function Dashboard() {
                     </div>
                     <div class="ml-2 w-full flex-1">
                       <div>
-                        <div class="mt-3 text-3xl font-bold leading-8">
-                          14
+                        <div class="mt-3 text-3xl  text-slate-900 font-bold leading-8">
+                          {scouts}
                         </div>
 
                         <div class="mt-1 text-base text-gray-600">
@@ -117,8 +131,8 @@ function Dashboard() {
                     </div>
                     <div class="ml-2 w-full flex-1">
                       <div>
-                        <div class="mt-3 text-3xl font-bold leading-8">
-                          12
+                        <div class="mt-3 text-3xl text-slate-900 font-bold leading-8">
+                         {players}
                         </div>
 
                         <div class="mt-1 text-base text-gray-600">

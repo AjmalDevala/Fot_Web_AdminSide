@@ -41,7 +41,7 @@ const Topbar = () => {
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
-        <IconButton onclilk={colors}>
+        <IconButton onClick={() => colors}>
           <PersonOutlinedIcon />
         </IconButton>
       </Box>
