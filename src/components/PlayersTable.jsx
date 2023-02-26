@@ -62,7 +62,7 @@ const PlayersTable = () => {
           display="flex"
           justifyContent="center"
           backgroundColor={
-            params.row.status === "unBlocked"
+            params.row.status === "unBlock"
               ? colors.greenAccent[600]
               : colors.redAccent[700]
           }

@@ -137,13 +137,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Manage Banner"
-              to="/facilities"
+            <Item
+              title="Premium Players"
+              to="/PremiumPlayers"
               icon={<PoolOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
             <div>
 
             <button
@@ -152,6 +152,8 @@ const Sidebar = () => {
                 localStorage.clear()
                 window.location.reload()
                 Navigate('/')
+                selected={selected}
+                setSelected={setSelected}
               }}
               ><ApartmentOutlinedIcon />Logout</button>
               </div>

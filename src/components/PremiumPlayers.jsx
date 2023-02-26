@@ -3,31 +3,17 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme/theme";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import Header from "../../components/Header";
 
-const ScoutTable = () => {
+const PremiumPlayers = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [scouts, setScout] = useState([]);
-  const [change, setChange] = useState(false);
-
+  const [players, setPlayers] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:7007/api/admin/allScout").then((response) => {
-      setScout(response.data.allScout);
-      console.log(response.data.allScout);
+    axios.get("http://localhost:7007/api/admin/allplayer").then((response) => {
+      console.log(response.data.PremiumPlayers);
+      setPlayers(response.data.PremiumPlayers);
     });
-  }, [change]);
-
-  const block = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/blockScout/${id}`)
-      .then(change === true ? setChange(false) : setChange(true));
-  };
-  const unBlock = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/aproved/${id}`)
-      .then(change === true ? setChange(false) : setChange(true));
-  };
+  }, []);
 
   const columns = [
     { field: "_id", headerName: "ID" },
@@ -47,50 +33,55 @@ const ScoutTable = () => {
       headerName: "Email",
       flex: 1,
     },
-    // {
-    //   field: "status",
-    //   headerName: "status",
-    //   flex: 1,
-    // },
     {
       field: "status",
-      headerName: "Access Level",
+      headerName: "status",
       flex: 1,
-      renderCell: (params) => (
-        <Box
-          width="60%"
-          m="0 auto"
-          p="5px"
-          display="flex"
-          justifyContent="center"
-          backgroundColor={
-            params.row.status === "Pending"
-            ? colors.redAccent[700]
-              : colors.greenAccent[600]
-          }
-          borderRadius="4px"
-        >
-          {params.row.status === "Pending" && (
-            <button
-              onClick={() => block(params.row._id)}
-              color={colors.grey[100]}
-              sx={{ ml: "5px" }}
-            > 
-              {params.row.status}
-            </button>
-          )}
-          {params.row.status === "Aproved" && (
-            <button
-              onClick={() => unBlock(params.row._id)}
-              color={colors.grey[100]}
-              sx={{ ml: "5px" }}
-            >
-              {params.row.status}
-            </button>
-          )}
-        </Box>
-      ),
     },
+    {
+      field: "premium",
+      headerName: "premium",
+      flex: 1,
+    },
+    // {
+    //   field: "status",
+    //   headerName: "Access Level",
+    //   flex: 1,
+    //   renderCell: (params) => (
+    //     <Box
+    //       width="60%"
+    //       m="0 auto"
+    //       p="5px"
+    //       display="flex"
+    //       justifyContent="center"
+    //       backgroundColor={
+    //         params.row.status === "unBlock"
+    //           ? colors.greenAccent[600]
+    //           : colors.redAccent[700]
+    //       }
+    //       borderRadius="4px"
+    //     >
+    //       {params.row.status === "unBlock" && (
+    //         <button
+    //           onClick={() => block(params.row._id)}
+    //           color={colors.grey[100]}
+    //           sx={{ ml: "5px" }}
+    //         > 
+    //           {params.row.status}
+    //         </button>
+    //       )}
+    //       {params.row.status === "Block" && (
+    //         <button
+    //           onClick={() => unBlock(params.row._id)}
+    //           color={colors.grey[100]}
+    //           sx={{ ml: "5px" }}
+    //         >
+    //           {params.row.status}
+    //         </button>
+    //       )}
+    //     </Box>
+    //   ),
+    // },
   ];
 
   return (
@@ -129,7 +120,7 @@ const ScoutTable = () => {
         }}
       >
         <DataGrid
-          rows={scouts}
+          rows={players}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
           getRowId={(row) => row._id}
@@ -139,4 +130,4 @@ const ScoutTable = () => {
   );
 };
 
-export default ScoutTable;
+export default PremiumPlayers;

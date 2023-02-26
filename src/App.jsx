@@ -10,6 +10,7 @@ import Sidebar from "./components/layout/Sidebar";
 import Topbar from "./components/layout/Topbar";
 import ScoutTablePage from "./pages/ScoutTablePage";
 import { authenticate } from "./redux/auth";
+import PremiumPlayers from "./components/PremiumPlayers";
 function App() {
   const [theme, colorMode] = useMode();
   //  const [login,setlogin]=useState(false);
@@ -34,10 +35,11 @@ function App() {
               <main className="content">
                 <Topbar />
                 <Routes>
-                   <Route path="*" element={<ErrorPage />} />
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/playersTable" element={<PlayersTable />} />
-                  <Route path="/scoutTable" element={<ScoutTablePage />} />
+                   <Route path="/scoutTable" element={<ScoutTablePage />} />
+                   <Route path="/premiumPlayers" element={<PremiumPlayers />} />
+                   <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </main>
             </div>
