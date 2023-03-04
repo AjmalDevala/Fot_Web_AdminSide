@@ -11,6 +11,7 @@ import Topbar from "./components/layout/Topbar";
 import ScoutTablePage from "./pages/ScoutTablePage";
 import { authenticate } from "./redux/auth";
 import PremiumPlayers from "./components/PremiumPlayers";
+import Chart from "./components/Chart";
 function App() {
   const [theme, colorMode] = useMode();
   //  const [login,setlogin]=useState(false);
@@ -21,6 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<LoginPage />} />
+          <Route path="/chart" element={<Chart />} />
+
         </Routes>
       </BrowserRouter>
     );

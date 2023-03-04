@@ -25,6 +25,7 @@ function Login() {
         
       let { token } = res.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('adminId',res.data.admin._id)
        window.location.reload();
         dispatch(authenticate());
         navigate('/home')

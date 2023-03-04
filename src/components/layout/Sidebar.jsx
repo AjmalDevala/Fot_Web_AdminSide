@@ -121,7 +121,7 @@ const Sidebar = () => {
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              // setSelected={setSelected}
             />
               <Item
                 title="Manage Scouts"
