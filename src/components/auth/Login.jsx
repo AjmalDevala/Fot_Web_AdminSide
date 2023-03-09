@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginValidation } from "../../helpers/validation";
+import Instance from "../config/Instance";
 function Login() {
   
   const dispatch = useDispatch();
@@ -21,14 +22,14 @@ function Login() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-      await axios.post('http://localhost:7007/api/admin/adminLogin',{values}).then((res)=>{
+      await Instance.post('/admin/adminLogin',{values}).then((res)=>{
         
       let { token } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('adminId',res.data.admin._id)
        window.location.reload();
         dispatch(authenticate());
-        navigate('/home')
+        navigate('/home',{replace:true})
       }).catch((error)=>{
         console.log(error)
         toast.error(error.response.data.error)

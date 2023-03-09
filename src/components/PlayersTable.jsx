@@ -2,28 +2,38 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme/theme";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import Instance from "./config/Instance";
 
 const PlayersTable = () => {
   const theme = useTheme();
+  const token = localStorage.getItem("token")
+
   const colors = tokens(theme.palette.mode);
   const [players, setPlayers] = useState([]);
   const [change, setChange] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:7007/api/admin/allplayer").then((response) => {
-      // console.log(response.data);
+    Instance.get("/admin/allplayer",{
+      headers :{Authorization: `Bearer ${token}`,}
+
+    }).then((response) => {
       setPlayers(response.data.allplayer);
     });
   }, [change]);
 
   const block = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/blockUser/${id}`)
+    Instance
+      .post(`/admin/blockUser/${id}`,{},{
+        headers :{Authorization: `Bearer ${token}`}
+
+      })
       .then(change === true ? setChange(false) : setChange(true));
   };
   const unBlock = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/unBlockUser/${id}`)
+    Instance
+      .post(`/admin/unBlockUser/${id}`,{},{
+        headers :{Authorization: `Bearer ${token}`}
+
+      })
       .then(change === true ? setChange(false) : setChange(true));
   };
 

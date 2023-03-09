@@ -2,14 +2,18 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme/theme";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import Instance from "./config/Instance";
 
 const PremiumPlayers = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [players, setPlayers] = useState([]);
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    axios.get("http://localhost:7007/api/admin/allplayer").then((response) => {
+    Instance.get("/admin/allplayer", {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
       console.log(response.data.PremiumPlayers);
       setPlayers(response.data.PremiumPlayers);
     });
@@ -66,7 +70,7 @@ const PremiumPlayers = () => {
     //           onClick={() => block(params.row._id)}
     //           color={colors.grey[100]}
     //           sx={{ ml: "5px" }}
-    //         > 
+    //         >
     //           {params.row.status}
     //         </button>
     //       )}

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {Chart as chartjs} from "chart.js/auto"
 import Instance from "./config/Instance";
 
-function Chart() {
+function Graph() {
   const [user, setUsers] = useState([]);
-  const [data, setData] = useState({
-        
+  const [data, setData] = useState({   
           
     labels: user?.map((data) => data._id) , 
     datasets: [{
@@ -21,6 +20,7 @@ function Chart() {
 
     }]
 });
+
 const options = { year: "numeric", month: "long", day: "numeric" };
 const formattedDate = (date) => {
   const dateObj = new Date(date);
@@ -43,7 +43,7 @@ const chart =()=>{
 
     useEffect(() => {
         setData({  
-            labels: user?.map((data) => formattedDate(data?.date)), 
+            labels: user?.map((data) =>formattedDate(data?.date)), 
             datasets: [{  
                 label:"Last 10 day player Entry",
                 data: user?.map((data) => data.count)
@@ -54,9 +54,9 @@ const chart =()=>{
 
   return (
     <div className='w-full'>  
-    <Bar data={data} />
+    <Line data={data} />
 </div>
   )
 }
 
-export default Chart;
+export default Graph;

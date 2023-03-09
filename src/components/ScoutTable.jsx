@@ -2,31 +2,42 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme/theme";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import Instance from "./config/Instance";
 // import Header from "../../components/Header";
 
 const ScoutTable = () => {
+  const token = localStorage.getItem("token");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [scouts, setScout] = useState([]);
   const [change, setChange] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:7007/api/admin/allScout").then((response) => {
+    Instance.get("/admin/allScout", {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
       setScout(response.data.allScout);
       console.log(response.data.allScout);
     });
   }, [change]);
 
   const block = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/blockScout/${id}`)
-      .then(change === true ? setChange(false) : setChange(true));
+    Instance.post(
+      `/admin/blockScout/${id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then(change === true ? setChange(false) : setChange(true));
   };
   const unBlock = (id) => {
-    axios
-      .post(`http://localhost:7007/api/admin/aproved/${id}`)
-      .then(change === true ? setChange(false) : setChange(true));
+    Instance.post(
+      `/admin/aproved/${id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then(change === true ? setChange(false) : setChange(true));
   };
 
   const columns = [
@@ -65,7 +76,7 @@ const ScoutTable = () => {
           justifyContent="center"
           backgroundColor={
             params.row.status === "Pending"
-            ? colors.redAccent[700]
+              ? colors.redAccent[700]
               : colors.greenAccent[600]
           }
           borderRadius="4px"
@@ -75,7 +86,7 @@ const ScoutTable = () => {
               onClick={() => block(params.row._id)}
               color={colors.grey[100]}
               sx={{ ml: "5px" }}
-            > 
+            >
               {params.row.status}
             </button>
           )}

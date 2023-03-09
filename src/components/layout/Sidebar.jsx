@@ -121,7 +121,7 @@ const Sidebar = () => {
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
-              // setSelected={setSelected}
+              setSelected={setSelected}
             />
               <Item
                 title="Manage Scouts"
@@ -144,18 +144,19 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <div>
+            <div className="ml-6" >
 
             <button
-              title="logout"
+               className=" text-base"
               onClick={()=>{
                 localStorage.clear()
                 window.location.reload()
                 Navigate('/')
                 selected={selected}
                 setSelected={setSelected}
+                
               }}
-              ><ApartmentOutlinedIcon />Logout</button>
+              ><ReceiptOutlinedIcon  />Logout</button>
               </div>
             {/* <Typography
               variant="h6"

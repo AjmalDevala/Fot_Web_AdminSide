@@ -12,6 +12,8 @@ import ScoutTablePage from "./pages/ScoutTablePage";
 import { authenticate } from "./redux/auth";
 import PremiumPlayers from "./components/PremiumPlayers";
 import Chart from "./components/Chart";
+import ProtectedRoutes from '../ProtectedRoutes'
+
 function App() {
   const [theme, colorMode] = useMode();
   //  const [login,setlogin]=useState(false);
@@ -38,10 +40,10 @@ function App() {
               <main className="content">
                 <Topbar />
                 <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/playersTable" element={<PlayersTable />} />
-                   <Route path="/scoutTable" element={<ScoutTablePage />} />
-                   <Route path="/premiumPlayers" element={<PremiumPlayers />} />
+                  <Route path="/" element={ <ProtectedRoutes ><Dashboard /></ProtectedRoutes> } />
+                  <Route path="/playersTable" element={ <ProtectedRoutes><PlayersTable /></ProtectedRoutes> } />
+                   <Route path="/scoutTable" element={<ProtectedRoutes><ScoutTablePage /></ProtectedRoutes>} />
+                   <Route path="/premiumPlayers" element={<ProtectedRoutes><PremiumPlayers /></ProtectedRoutes>} />
                    <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </main>
