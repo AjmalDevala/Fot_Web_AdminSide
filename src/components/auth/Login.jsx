@@ -37,7 +37,7 @@ function Login() {
   }});
  
   return (
-    <div className="h-screen bg-[url('/src/assets/images/playerlogin.jpg')] ">
+    <div className="h-screen bg-[url('/images/playerlogin.jpg')] ">
       <Toaster position="top-center" reverseOrder={false}></Toaster>
       <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg">

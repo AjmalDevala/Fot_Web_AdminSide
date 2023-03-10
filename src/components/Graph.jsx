@@ -9,7 +9,7 @@ function Graph() {
           
     labels: user?.map((data) => data._id) , 
     datasets: [{
-        label:"Last 10 day player Entry",
+        label:"Premium player",
         data: user?.map((data) => data.count),
         backgroundColor:['teal'],  
         color:['white'],
@@ -45,7 +45,7 @@ const chart =()=>{
         setData({  
             labels: user?.map((data) =>formattedDate(data?.date)), 
             datasets: [{  
-                label:"Last 10 day player Entry",
+                label:"Premium player ",
                 data: user?.map((data) => data.count)
     
             }]
